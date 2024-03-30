@@ -9,3 +9,8 @@
 
 ```
 
+For install:
+```bash
+curl -sSf https://raw.githubusercontent.com/fzaca/WriteTon/master/install.sh | sh
+```
+
