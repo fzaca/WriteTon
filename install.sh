@@ -21,7 +21,7 @@ install() {
 
   # Descargar binario
   echo "Downloading the application binary..."
-  wget -nv "$BIN_URL" -O "$INSTALL_DIR/writeton"
+  wget -nv -q --show-progress "$BIN_URL" -O "$INSTALL_DIR/writeton"
 
   # Asegurarse que sea ejecutable
   chmod +x "$INSTALL_DIR/writeton"
