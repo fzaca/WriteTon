@@ -5,5 +5,9 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }
+rusqlite = { version = "0.31.0", features = ["bundled"] }
+dirs = "3.0"
+nanoid = "0.4.0"
+colored = "2.1.0"
 # crossterm = "0.27.0"
 # ratatui = "0.26.1"
