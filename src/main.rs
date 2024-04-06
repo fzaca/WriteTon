@@ -4,6 +4,7 @@ use clap::Parser;
 mod cli;
 mod commands;
 mod database;
+mod models;
 mod utils;
 
 fn main() {
