@@ -1,5 +1,8 @@
+use colored::Colorize;
+
 use crate::database;
 use crate::models::Note;
+use crate::utils::truncate::truncate_string;
 
 pub fn exec() {
     match get_notes() {
@@ -8,7 +11,8 @@ pub fn exec() {
                 println!("No hay ninguna nota.");
             } else {
                 for note in notes {
-                    println!("Note ID: {}, Content: {}", note.id, note.content);
+                    let truncated_content = truncate_string(&note.content, 50, true);
+                    println!(" {} {}", note.id.bright_red(), truncated_content);
                 }
             }
         }
