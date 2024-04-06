@@ -10,11 +10,11 @@ fn main() {
     let args = Cli::parse();
 
     if let Err(err) = database::ensure_database_created() {
-        println!("Error creating the database: {err}");
+        eprintln!("Error creating the database: {err}");
         std::process::exit(1);
     }
 
     match args.command {
-        Commands::New { content } => commands::new::exec(content),
+        Commands::New { content } => commands::new::exec(&content),
     }
 }

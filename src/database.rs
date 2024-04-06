@@ -26,7 +26,7 @@ pub fn ensure_database_created() -> Result<()> {
     let conn = get_conn()?;
     conn.execute(
         "CREATE TABLE note (
-            id INTEGER PRIMARY KEY,
+            id TEXT PRIMARY KEY,
             content TEXT
         )",
         (),
