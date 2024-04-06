@@ -4,7 +4,7 @@
 INSTALL_DIR="$HOME/.local/share/writeton"
 
 # Binario de la app
-BIN_URL="https://github.com/fzaca/WriteTon/releases/download/v0.1.0/writeton"
+BIN_URL="https://github.com/fzaca/WriteTon/releases/download/v0.1.1/writeton"
 
 # Title
 install() {
