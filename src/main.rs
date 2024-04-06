@@ -16,5 +16,6 @@ fn main() {
 
     match args.command {
         Commands::New { content } => commands::new::exec(&content),
+        Commands::List => commands::list::exec(),
     }
 }

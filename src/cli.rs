@@ -13,4 +13,5 @@ pub enum Commands {
         #[arg(short = 'c', long)] // TODO: Add about
         content: String,
     },
+    List,
 }
