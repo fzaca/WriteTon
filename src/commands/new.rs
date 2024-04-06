@@ -2,18 +2,14 @@ use crate::database;
 use crate::utils::random_id;
 
 pub fn exec(content: &String) {
-    match database::get_conn() {
-        Ok(conn) => match create_note(&conn, &content) {
-            Ok(_) => println!("Note created successfully"),
-            Err(err) => eprintln!("Error created note: {:?}", err),
-        },
-        Err(err) => {
-            eprintln!("Error obtaining connection to the database: {:?}", err);
-        }
+    match create_note(&content) {
+        Ok(_) => println!("Note created successfully"),
+        Err(err) => eprintln!("Error created note: {:?}", err),
     }
 }
 
-fn create_note(conn: &rusqlite::Connection, content: &String) -> Result<(), rusqlite::Error> {
+fn create_note(content: &String) -> Result<(), rusqlite::Error> {
+    let conn = database::get_conn()?;
     conn.execute(
         "INSERT INTO note (id, content) VALUES (?1, ?2)",
         (random_id::generate_random_id(), content),
