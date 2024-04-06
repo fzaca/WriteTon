@@ -2,7 +2,7 @@ use crate::database;
 use crate::utils::random_id;
 
 pub fn exec(content: &String) {
-    match create_note(&content) {
+    match create_note(content) {
         Ok(_) => println!("Note created successfully"),
         Err(err) => eprintln!("Error created note: {:?}", err),
     }
