@@ -14,4 +14,9 @@ pub enum Commands {
         content: String,
     },
     List,
+    Rm {
+        // TODO: Add tui selector if not argument
+        #[arg(index = 1)] // positional argument
+        note_id: String,
+    },
 }
