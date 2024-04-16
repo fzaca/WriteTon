@@ -1,8 +1,10 @@
-use colored::Colorize;
+use tabled::{
+    settings::{object, Color, Style, Width},
+    Table,
+};
 
 use crate::database;
 use crate::models::Note;
-use crate::utils::truncate::truncate_string;
 
 pub fn exec() {
     match get_notes() {
@@ -10,10 +12,7 @@ pub fn exec() {
             if notes.is_empty() {
                 println!("No hay ninguna nota.");
             } else {
-                for note in notes {
-                    let truncated_content = truncate_string(&note.content, 50, true);
-                    println!(" {} {}", note.id.bright_red(), truncated_content);
-                }
+                print_notes(notes);
             }
         }
         Err(err) => eprintln!("Error getting the list of notes: {:?}", err),
@@ -36,4 +35,20 @@ fn get_notes() -> Result<Vec<Note>, rusqlite::Error> {
     }
 
     Ok(notes)
+}
+
+fn print_notes(notes: Vec<Note>) {
+    let mut table = Table::new(notes);
+
+    table
+        .with(Style::modern())
+        .modify(object::Columns::single(0), Color::FG_BRIGHT_RED)
+        .modify(object::Columns::single(1), Color::FG_BRIGHT_CYAN)
+        .modify(object::Rows::first(), Color::FG_BRIGHT_BLACK)
+        .modify(
+            object::Columns::single(1),
+            Width::truncate(40).suffix("..."),
+        );
+
+    println!("{}", table.to_string());
 }
