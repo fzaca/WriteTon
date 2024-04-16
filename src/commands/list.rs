@@ -1,5 +1,9 @@
 use tabled::{
-    settings::{object, Color, Style, Width},
+    settings::{
+        object,
+        style::{HorizontalLine, VerticalLine},
+        Color, Style, Width,
+    },
     Table,
 };
 
@@ -40,8 +44,14 @@ fn get_notes() -> Result<Vec<Note>, rusqlite::Error> {
 fn print_notes(notes: Vec<Note>) {
     let mut table = Table::new(notes);
 
+    let theme = Style::modern()
+        .horizontals([(1, HorizontalLine::inherit(Style::modern()))])
+        .verticals([(1, VerticalLine::inherit(Style::modern()))])
+        .remove_horizontal()
+        .remove_vertical();
+
     table
-        .with(Style::modern())
+        .with(theme)
         .modify(object::Columns::single(0), Color::FG_BRIGHT_RED)
         .modify(object::Columns::single(1), Color::FG_BRIGHT_CYAN)
         .modify(object::Rows::first(), Color::FG_BRIGHT_BLACK)
