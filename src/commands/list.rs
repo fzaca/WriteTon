@@ -25,11 +25,12 @@ pub fn exec() {
 
 fn get_notes() -> Result<Vec<Note>, rusqlite::Error> {
     let conn = database::get_conn()?;
-    let mut stmt = conn.prepare("SELECT id, content FROM note")?;
+    let mut stmt = conn.prepare("SELECT id, content, last_modified FROM note")?;
     let note_iter = stmt.query_map([], |row| {
         Ok(Note {
             id: row.get(0)?,
             content: row.get(1)?,
+            last_modified: row.get(2)?,
         })
     })?;
 

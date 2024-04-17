@@ -27,8 +27,19 @@ pub fn ensure_database_created() -> Result<()> {
     conn.execute(
         "CREATE TABLE note (
             id TEXT PRIMARY KEY,
-            content TEXT
+            content TEXT,
+            last_modified DATETIME DEFAULT CURRENT_TIMESTAMP
         )",
+        (),
+    )?;
+
+    conn.execute(
+        "CREATE TRIGGER update_last_modified 
+            AFTER UPDATE ON note 
+            FOR EACH ROW 
+            BEGIN 
+                UPDATE note SET last_modified = CURRENT_TIMESTAMP WHERE id = OLD.id; 
+            END;",
         (),
     )?;
 
