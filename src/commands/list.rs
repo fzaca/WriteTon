@@ -14,7 +14,7 @@ pub fn exec() {
     match get_notes() {
         Ok(notes) => {
             if notes.is_empty() {
-                println!("No hay ninguna nota.");
+                println!("There are no notes.");
             } else {
                 print_notes(notes);
             }
@@ -44,7 +44,7 @@ fn get_notes() -> Result<Vec<Note>, rusqlite::Error> {
 fn print_notes(notes: Vec<Note>) {
     let mut table = Table::new(notes);
 
-    let theme = Style::modern()
+    let theme = Style::modern() // FIXME: Separate in utils file this theme with colors
         .horizontals([(1, HorizontalLine::inherit(Style::modern()))])
         .verticals([(1, VerticalLine::inherit(Style::modern()))])
         .remove_horizontal()
