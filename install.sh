@@ -16,6 +16,12 @@ install() {
   echo "|__/|__/_/  /_/\__/\___/_/  \____/_/ /_/"
   echo ""
 
+  # Eliminar directorio de instalación si existe
+  if [ -d "$INSTALL_DIR" ]; then
+    echo "Removing existing installation..."
+    rm -rf "$INSTALL_DIR"
+  fi
+
   # Crea el directorio de instalación si no existe
   mkdir -p "$INSTALL_DIR"
 
